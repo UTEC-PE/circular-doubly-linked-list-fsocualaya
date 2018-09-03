@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/pyxel/Desktop/UTEC/4to_semestre/AED/semana2/circular-doubly-linked-list-fsocualaya/iterator.h
+node.h
+/home/pyxel/Desktop/UTEC/4to_semestre/AED/semana2/circular-doubly-linked-list-fsocualaya/node.h
+
+/home/pyxel/Desktop/UTEC/4to_semestre/AED/semana2/circular-doubly-linked-list-fsocualaya/list.h
+iostream
+-
+node.h
+/home/pyxel/Desktop/UTEC/4to_semestre/AED/semana2/circular-doubly-linked-list-fsocualaya/node.h
+iterator.h
+/home/pyxel/Desktop/UTEC/4to_semestre/AED/semana2/circular-doubly-linked-list-fsocualaya/iterator.h
+
+/home/pyxel/Desktop/UTEC/4to_semestre/AED/semana2/circular-doubly-linked-list-fsocualaya/main.cpp
+iostream
+-
+random
+-
+assert.h
+-
+string.h
+-
+list.h
+/home/pyxel/Desktop/UTEC/4to_semestre/AED/semana2/circular-doubly-linked-list-fsocualaya/list.h
+
+/home/pyxel/Desktop/UTEC/4to_semestre/AED/semana2/circular-doubly-linked-list-fsocualaya/node.h
+iostream
+-
+
