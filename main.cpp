@@ -26,22 +26,13 @@ int main(int argc, char *argv[]) {
     cout << "===========================================================" << endl << endl;
 
     List<int> test;
-    cout<<test.empty()<<"\n";
-    test.pop_front();
+    test.push_front(3);
+    test.push_front(4);
     test.push_front(5);
-    test.push_back(3);
-    cout<<test.size()<<endl;
-    test.push_front(7);
-    cout<<test.size()<<endl;
-    cout<<test.front()<<" "<<test.back()<<endl;
     test.pop_front();
     cout<<test.front()<<" "<<test.back()<<endl;
-    test.pop_front();
-    cout<<test.front()<<" "<<test.back()<<endl;
-    test.pop_front();
-    cout<<test.front()<<" "<<test.back()<<endl;
-    test.pop_front();
-    cout<<test.empty();
+
+    cout<<test.size();
     return 0;
 }
 

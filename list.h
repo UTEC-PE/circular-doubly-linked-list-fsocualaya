@@ -34,13 +34,13 @@ class List {
                 this->start->prev->next = node;
                 this->start->prev = node;
                 this->start = node;
-                cout<<"Pushed in non empty list\n";
+//                cout<<"Pushed in non empty list\n";
             }
             else{
                 node->prev = node;
                 node->next = node;
                 this->start = node;
-                cout<<"Pushed in empty list\n";
+//                cout<<"Pushed in empty list\n";
             }
         };
 
@@ -52,40 +52,53 @@ class List {
                 node->prev = this->start->prev->next;
                 this->start->prev->next = node;
                 this->start->prev = node;
-                cout<<"Pushed in non empty list\n";
+//                cout<<"Pushed in non empty list\n";
             }
             else{
                 node->prev = node;
                 node->next = node;
                 this->start = node;
-                cout<<"Pushed in empty list\n";
+//                cout<<"Pushed in empty list\n";
             }
         };
         void pop_front(){
-            if(start){
-                auto* tmp = new Node<T>;
-                tmp = this->start;
+
+            if(!start){
+                cout<<"Error: Empty List!\n";
+                return;
+            }
+
+            auto* tmp = this->start;
+
+            if(this->start==this->start->next){
+                this->start = nullptr;
+                delete tmp;
+                return;
+            }
+
+            else {
                 this->start->prev->next = this->start->next;
                 this->start->next->prev = this->start->prev;
                 this->start = this->start->next;
-                if(this->start == this->start->next)
-                    cout<<"One single element in list!\n";
+                this->start = tmp->next;
                 delete tmp;
-            }
-            else{
-                cout<<"Error: Empty List!\n";
+                return;
             }
         };
-        void pop_back(){
 
-        };
+        void pop_back();
 
         T get(int position){
-
+            auto* tmp = this->start;
+            for(int i = 0; i<position;i++){
+                tmp=tmp->next;
+            }
+            return tmp->data;
         };
 
         void concat(List<T> &other){
             this->start->prev->next = other.start;
+            this->start->prev = other.start->prev;
         };
 
         bool empty(){
@@ -93,11 +106,14 @@ class List {
         };
 
         int size(){
-            int n=1;
-            auto* temp = this->start;
-            while(temp->next!=start){
-                temp = temp->next;
-                n++;
+            int n=0;
+            if(start) {
+                auto *temp = this->start;
+                do{
+                    n++;
+                    temp = temp->next;
+                }
+                while (temp->next != temp->prev);
             }
             return n;
         };
