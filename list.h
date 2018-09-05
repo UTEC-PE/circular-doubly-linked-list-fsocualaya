@@ -11,18 +11,23 @@ template <typename T>
 class List {
     private:
         Node<T>* start;
-
+        int nodes=0;
     public:
         List(){
             start = nullptr;
         };
 
         T front(){
-            return start->data;
+            if(start)
+                return start->data;
+            throw (exception_ptr());
         };
 
         T back(){
-            return start->prev->data;
+            if(start)
+                return start->prev->data;
+            else
+                throw(exception_ptr());
         };
 
         void push_front(T value){
@@ -34,12 +39,14 @@ class List {
                 this->start->prev->next = node;
                 this->start->prev = node;
                 this->start = node;
+                nodes++;
 //                cout<<"Pushed in non empty list\n";
             }
             else{
                 node->prev = node;
                 node->next = node;
                 this->start = node;
+                nodes++;
 //                cout<<"Pushed in empty list\n";
             }
         };
@@ -52,48 +59,63 @@ class List {
                 node->prev = this->start->prev->next;
                 this->start->prev->next = node;
                 this->start->prev = node;
+                nodes++;
 //                cout<<"Pushed in non empty list\n";
             }
             else{
                 node->prev = node;
                 node->next = node;
                 this->start = node;
+                nodes++;
 //                cout<<"Pushed in empty list\n";
             }
         };
         void pop_front(){
-
-            if(!start){
-                cout<<"Error: Empty List!\n";
+            if(!start)
                 return;
-            }
 
             auto* tmp = this->start;
 
-            if(this->start==this->start->next){
-                this->start = nullptr;
+            if(this->size()==1){
                 delete tmp;
-                return;
+                this->start = nullptr;
             }
 
             else {
                 this->start->prev->next = this->start->next;
                 this->start->next->prev = this->start->prev;
                 this->start = this->start->next;
-                this->start = tmp->next;
                 delete tmp;
-                return;
             }
         };
 
-        void pop_back();
+        void pop_back(){
+            if(!start)
+                return;
+
+            auto* tmp = this->start->prev;
+            if(this->size()==1){
+                delete tmp;
+                this->start = nullptr;
+            }
+
+            else{
+                this->start->prev = tmp->prev;
+                tmp->prev->next = this->start;
+                delete tmp;
+            }
+        };
 
         T get(int position){
-            auto* tmp = this->start;
-            for(int i = 0; i<position;i++){
-                tmp=tmp->next;
+            if(start) {
+                auto *tmp = this->start;
+                for (int i = 0; i < position; i++) {
+                    tmp = tmp->next;
+                }
+                return tmp->data;
             }
-            return tmp->data;
+            throw(exception_ptr());
+
         };
 
         void concat(List<T> &other){
@@ -106,26 +128,48 @@ class List {
         };
 
         int size(){
-            int n=0;
-            if(start) {
-                auto *temp = this->start;
-                do{
-                    n++;
-                    temp = temp->next;
+            int n=1;
+            if(this->start){
+            auto* tmp = this->start;
+
+            while(tmp->next != this->start){
+                tmp = tmp->next;
+                n++;
                 }
-                while (temp->next != temp->prev);
             }
+            else
+                n--;
             return n;
         };
 
         void clear(){
-
+            auto* tmp = this->start;
+            while(this->size()){
+                auto* tmp_aux = tmp;
+                tmp = tmp->next;
+                delete tmp_aux;
+            }
+            delete tmp;
+            this->start = nullptr;
         };
 
-        Iterator<T> begin();
-        Iterator<T> end();
+        Iterator<T> begin(){
+            return Iterator<T>(this->start);
+        };
+        Iterator<T> end(){
+            return Iterator<T>(this->start->prev);
+        };
 
-        ~List()= default;
+        ~List(){
+            auto* tmp = this->start;
+            for(int i=0;i<this->size();i++){
+                if(tmp->next!= this->start){
+                    tmp =tmp->next;
+                    delete tmp->prev;
+                }
+            }
+            delete tmp;
+        };
 };
 
 #endif
