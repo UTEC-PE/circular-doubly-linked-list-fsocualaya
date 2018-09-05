@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/circular_doubly_linked_list_fsocualaya.dir/main.cpp.o  -o circular_doubly_linked_list_fsocualaya 

@@ -1,0 +1,4 @@
+/opt/clion-2018.1.3/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/pyxel/Desktop/UTEC/4to_semestre/AED/semana2/circular-doubly-linked-list-fsocualaya
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/pyxel/Desktop/UTEC/4to_semestre/AED/semana2/circular-doubly-linked-list-fsocualaya/cmake-build-debug
