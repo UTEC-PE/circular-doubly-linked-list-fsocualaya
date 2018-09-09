@@ -11,7 +11,7 @@ template <typename T>
 class List {
     private:
         Node<T>* start;
-        int nodes=0;
+        int nodes=0; // Para que está nodes?
     public:
         List(){
             start = nullptr;
@@ -65,17 +65,16 @@ class List {
             else{
                 node->prev = node;
                 node->next = node;
-                this->start = node;
+                this->start = node; 
                 nodes++;
 //                cout<<"Pushed in empty list\n";
             }
         };
-        void pop_front(){
+        void pop_front(){ // No estás actualizando nodes
             if(!start)
                 return;
 
             auto* tmp = this->start;
-
             if(this->size()==1){
                 delete tmp;
                 this->start = nullptr;
@@ -89,11 +88,12 @@ class List {
             }
         };
 
-        void pop_back(){
+        void pop_back(){ // No estás actualizando nodes
             if(!start)
                 return;
 
             auto* tmp = this->start->prev;
+            cout << "Size: " << size() << endl;
             if(this->size()==1){
                 delete tmp;
                 this->start = nullptr;
@@ -101,7 +101,7 @@ class List {
 
             else{
                 this->start->prev = tmp->prev;
-                tmp->prev->next = this->start;
+                tmp->prev->next = this->start; // Esto está mal, deberías hacerlo como el pop anterior
                 delete tmp;
             }
         };
@@ -109,7 +109,7 @@ class List {
         T get(int position){
             if(start) {
                 auto *tmp = this->start;
-                for (int i = 0; i < position; i++) {
+                for (int i = 0; i < position; i++) { // Podrías usar módulo
                     tmp = tmp->next;
                 }
                 return tmp->data;
@@ -120,11 +120,11 @@ class List {
 
         void concat(List<T> &other){
             this->start->prev->next = other.start;
-            this->start->prev = other.start->prev;
+            this->start->prev = other.start->prev; // Falta actualizar Other
         };
 
         bool empty(){
-            return (bool)!(this->start);
+            return (bool)!(this->start); // No es necesario el cast
         };
 
         int size(){
